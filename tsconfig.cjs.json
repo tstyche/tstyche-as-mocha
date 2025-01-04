@@ -6,6 +6,6 @@
     "outDir": "./build/cjs",
     "target": "ES2016"
   },
-  "include": ["./source/mocha.ts"],
+  "include": ["./source/**/*.ts"],
   "extends": "./tsconfig.json"
 }

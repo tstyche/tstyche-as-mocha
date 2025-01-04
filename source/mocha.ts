@@ -1,8 +1,18 @@
 import * as path from "node:path";
 import * as process from "node:process";
 import * as util from "node:util";
-// import type * as M from "mocha";
 import { type CommandLineOptions, Config, Runner, Select } from "tstyche/tstyche";
+
+let scriptDir: string;
+if (typeof global.__dirname === "string") {
+  scriptDir = global.__dirname;
+} else if (typeof global.require?.main?.path === "string") {
+  scriptDir = path.basename(global.require.main.path);
+} else if (typeof import.meta?.dirname === "string") {
+  scriptDir = import.meta.dirname;
+} else {
+  scriptDir = process.cwd();
+}
 
 const {
   values: { config: configArg, grep, help, reporter: reporterArg },
@@ -83,15 +93,10 @@ if (reporterArg == null) {
 }
 
 const run = async () => {
-  const reporterModule = (await import(reporterArg)).default as unknown;
-  if (typeof reporterModule !== "function") {
-    throw new Error(`Imported reporter does not have a default export: ${reporterArg}`);
-  }
-  // const fn = reporterModule as (runner: M.Runner) => void;
   const configOptions = await Config.parseConfigFile(configArg);
   const commandLineOptions: CommandLineOptions = {};
   if (grep != null && grep !== "") {
-    // tstyche doesn't support patterns, which IJ tries to add by default.
+    // TSTyche doesn't support patterns, which IJ tries to add by default.
     // Strip it down to support just a substring match.  Won't handle multiple
     // values!
     commandLineOptions.only = grep.replace(/^\^|\$$/g, "");
@@ -109,12 +114,9 @@ const run = async () => {
     ...(pathMatch == null ? {} : { pathMatch }),
   });
   // Clear out the default Line and Summary reporters.
-  resolvedConfig.reporters = [];
+  resolvedConfig.reporters = [path.resolve(scriptDir, "AsMochaReporter.js")];
   const testFiles = await Select.selectFiles(resolvedConfig);
   const runner = new Runner(resolvedConfig);
-  // Add in the shim.
-  // const reporter = new MochaReporter(resolvedConfig, fn);
-  // runner.addReporter(reporter);
   // Ready?  Go!!!!
   await runner.run(testFiles);
 };
