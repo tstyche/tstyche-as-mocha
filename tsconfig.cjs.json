@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "outDir": "./build/cjs",
+    "target": "ES2016"
+  },
+  "include": ["./source/mocha.ts"],
+  "extends": "./tsconfig.json"
+}

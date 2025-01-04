@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "Node16",
+    "noEmit": false,
+    "outDir": "./build/esm",
+    "rootDir": "./source",
+    "target": "ES2022"
+  },
+  "include": ["./source/mocha.ts"],
+  "extends": "./tsconfig.json"
+}

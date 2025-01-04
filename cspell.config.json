@@ -1,0 +1,12 @@
+{
+  "cache": {
+    "cacheLocation": "./.cache/cspell",
+    "useCache": true
+  },
+  "files": ["**/*.js", "**/*.json", "**/*.md", "source/**/*", "static/**/*", "tests/**/*"],
+  "ignorePaths": ["build/**/*"],
+  "ignoreRegExpList": ["\"tstyche/tstyche\"", "tstyche#\\d+"],
+  "language": "en-US",
+  "useGitignore": true,
+  "words": ["mochajs"]
+}

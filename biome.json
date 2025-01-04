@@ -1,0 +1,73 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "files": {
+    "ignore": [".cache/**", ".idea/**", ".yarn/**", "build/**", "coverage/**", "node_modules/**"]
+  },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "complexity": {
+        "noBannedTypes": "off",
+        "noStaticOnlyClass": "off",
+        "noUselessStringConcat": "error",
+        "noUselessUndefinedInitialization": "error",
+        "useDateNow": "error",
+        "useLiteralKeys": "off"
+      },
+      "correctness": {
+        "noUndeclaredDependencies": "error",
+        "noUndeclaredVariables": "error",
+        "noUnusedFunctionParameters": "error",
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "noUnusedVariables": "error",
+        "useImportExtensions": "error",
+        "useJsxKeyInIterable": "off"
+      },
+      "recommended": true,
+      "style": {
+        "noImplicitBoolean": "error",
+        "noNegationElse": "error",
+        "noParameterAssign": "off",
+        "noParameterProperties": "error",
+        "noYodaExpression": "error",
+        "useBlockStatements": "error",
+        "useCollapsedElseIf": "error",
+        "useConsistentArrayType": {
+          "level": "error",
+          "options": {
+            "syntax": "generic"
+          }
+        },
+        "useConsistentBuiltinInstantiation": "error",
+        "useExplicitLengthCheck": "error",
+        "useForOf": "error",
+        "useNamingConvention": "error",
+        "useShorthandAssign": "error",
+        "useThrowNewError": "error"
+      },
+      "suspicious": {
+        "noConsole": {
+          "level": "warn",
+          "options": {
+            "allow": ["info"]
+          }
+        },
+        "noConstEnum": "off",
+        "noEvolvingTypes": "error",
+        "noMisplacedAssertion": "error",
+        "noSkippedTests": "error",
+        "useAwait": "error",
+        "useErrorMessage": "error",
+        "useNumberToFixedDigitsArgument": "error"
+      }
+    }
+  },
+  "organizeImports": {
+    "enabled": true
+  }
+}

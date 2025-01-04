@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./build/types",
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "sourceMap": true,
+    "rootDir": "./source",
+    "noEmit": false,
+    "outDir": "./build/types"
+  },
+  "include": ["./source/mocha.ts"],
+  "extends": "./tsconfig.json"
+}
