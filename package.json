@@ -1,35 +1,27 @@
 {
-  "bin": "./source/mocha.ts",
+  "name": "tstyche-as-mocha",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Run tstyche tests with a mocha-lookalike runner, allowing for IDE and mocha reporter integration",
+  "keywords": [
+    "typescript",
+    "test",
+    "runner",
+    "tstyche",
+    "mocha"
+  ],
+  "homepage": "https://tstyche.org",
   "bugs": {
     "url": "https://github.com/tstyche/tstyche-as-mocha/issues"
   },
-  "description": "Run tstyche tests with a mocha-lookalike runner, allowing for IDE and mocha reporter integration",
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@types/mocha": "10.0.10",
-    "@types/node": "22.10.5",
-    "cpr": "3.0.1",
-    "cspell": "8.17.1",
-    "mkdirp": "3.0.1",
-    "mocha": "11.0.1",
-    "rimraf": "6.0.1",
-    "tstyche": "3.3.1",
-    "typescript": "5.7.2"
-  },
-  "engines": {
-    "node": ">=18.19"
-  },
-  "funding": "https://github.com/tstyche/tstyche?sponsor=1",
-  "homepage": "https://tstyche.org",
-  "keywords": ["typescript", "test", "runner", "tstyche", "mocha"],
-  "license": "MIT",
-  "name": "tstyche-as-mocha",
-  "packageManager": "yarn@4.6.0",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/tstyche/tstyche-as-mocha.git"
   },
+  "funding": "https://github.com/tstyche/tstyche?sponsor=1",
+  "license": "MIT",
+  "type": "module",
+  "bin": "./source/mocha.ts",
   "scripts": {
     "build": "yarn clean && yarn build:mkdir && yarn build:cjs && yarn build:esm && yarn build:types && yarn build:static && yarn build:readme",
     "build:cjs": "echo '🚧 TODO: CJS 🚧'",
@@ -47,6 +39,20 @@
     "prepublish": "yarn clean && yarn build",
     "test": "echo '🚧 TODO: tests 🚧'"
   },
-  "type": "module",
-  "version": "1.0.0"
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/mocha": "10.0.10",
+    "@types/node": "22.10.5",
+    "cpr": "3.0.1",
+    "cspell": "8.17.1",
+    "mkdirp": "3.0.1",
+    "mocha": "11.0.1",
+    "rimraf": "6.0.1",
+    "tstyche": "3.3.1",
+    "typescript": "5.7.2"
+  },
+  "packageManager": "yarn@4.6.0",
+  "engines": {
+    "node": ">=18.19"
+  }
 }
