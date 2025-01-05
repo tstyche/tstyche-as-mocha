@@ -1,9 +1,12 @@
 import * as path from "node:path";
+import {fileURLToPath} from "node:url";
 import { expect } from "chai";
 import { describe, it } from "mocha";
 import AsMochaReporter from "../source/AsMochaReporter.js";
 
 const reporterPath = "path/to/reporter.js";
+const metaUrl = import.meta.url;
+const dirName = global.__dirname ?? path.dirname(fileURLToPath(metaUrl));
 
 describe("AsMochaReporter", () => {
   describe("getReporterScriptPath", () => {
@@ -50,13 +53,13 @@ describe("AsMochaReporter", () => {
       expect(loaded).is.a("function");
     });
     it("can load ESM from path", async () => {
-      const testReporterPath = path.resolve(import.meta.dirname, "test-reporter.mjs");
+      const testReporterPath = path.resolve(dirName, "test-reporter.mjs");
       const loaded = await AsMochaReporter.loadReporter({ reporter: testReporterPath });
       expect(loaded).is.a("function");
       expect(loaded.name).eq("testReporter");
     });
     it("can load CJS from path", async () => {
-      const testReporterPath = path.resolve(import.meta.dirname, "test-reporter.cjs");
+      const testReporterPath = path.resolve(dirName, "test-reporter.cjs");
       const loaded = await AsMochaReporter.loadReporter({ reporter: testReporterPath });
       expect(loaded).is.a("function");
       expect(loaded.name).eq("testReporter");

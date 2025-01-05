@@ -1,17 +1,29 @@
 import * as path from "node:path";
 import * as process from "node:process";
+import { fileURLToPath } from "node:url";
 import * as util from "node:util";
 import { type CommandLineOptions, Config, Runner, Select } from "tstyche/tstyche";
 
 let scriptDir: string;
 if (typeof global.__dirname === "string") {
+  // Imported from CJS on node.
   scriptDir = global.__dirname;
 } else if (typeof global.require?.main?.path === "string") {
-  scriptDir = path.basename(global.require.main.path);
+  // Imported from CJS ... elsewhere?
+  scriptDir = path.dirname(global.require.main.path);
 } else if (typeof import.meta?.dirname === "string") {
+  // Imported from ESM on node v20+
   scriptDir = import.meta.dirname;
+} else if (typeof import.meta?.url === "string") {
+  // Imported from ESM on node 18
+  scriptDir = path.dirname(fileURLToPath(import.meta.url));
 } else {
-  scriptDir = process.cwd();
+  // No clue.
+  function pathFromStack(): string | undefined {
+    const scriptPath = new Error("unnecessary").stack?.match(/\s+at\s+pathFromStack\s+\((.+?)(?::.+?)?\)/)?.[1];
+    return scriptPath == null ? undefined : path.dirname(scriptPath);
+  }
+  scriptDir = pathFromStack() ?? process.cwd();
 }
 
 const {
@@ -21,7 +33,7 @@ const {
   allowPositionals: true,
   options: {
     /**
-     * This is from mocha.  Matching in tstyche doesn't use patterns,
+     * This is from mocha.  Matching in TSTyche doesn't use patterns,
      * it's just strings, but it will work for very simple "run this
      * describe block" use-cases.
      */
@@ -29,20 +41,20 @@ const {
       type: "string",
     },
     /**
-     * This is neither mocha, tstyche, nor IJ.  It's just trying to be helpful.
+     * This is neither mocha, TSTyche, nor IJ.  It's just trying to be helpful.
      */
     help: {
       type: "boolean",
       short: "h",
     },
     /**
-     * This is for tstyche.  (Though it is also a standard mocha option.)
+     * This is for TSTyche.  (Though it is also a standard mocha option.)
      */
     config: {
       type: "string",
     },
     /**
-     * This is from mocha, but tstyche has no equivalent.
+     * This is from mocha, but TSTyche has no equivalent.
      */
     recursive: {
       type: "boolean",

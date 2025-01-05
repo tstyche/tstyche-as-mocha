@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "description": "Run tstyche tests with a mocha-lookalike runner, allowing for IDE and mocha reporter integration",
-  "keywords": ["typescript", "test", "runner", "tstyche", "mocha"],
+  "keywords": [
+    "typescript",
+    "test",
+    "runner",
+    "tstyche",
+    "mocha"
+  ],
   "homepage": "https://tstyche.org",
   "bugs": {
     "url": "https://github.com/tstyche/tstyche-as-mocha/issues"
@@ -30,11 +36,15 @@
     "clean": "rimraf build --preserve-root",
     "format": "biome format --write --verbose",
     "lint": "biome lint --write",
+    "precommit": "yarn lint && yarn check && yarn build && yarn test",
     "prepublish": "yarn build",
     "test": "yarn test:mocha && yarn test:tstyche && yarn test:tstyche-as-mocha",
     "test:mocha": "mocha",
     "test:tstyche": "tstyche type-test",
-    "test:tstyche-as-mocha": "tsx ./source/mocha.ts --reporter ../test/test-reporter.mjs"
+    "test:tstyche-as-mocha": "tsx ./source/mocha.ts --reporter ../test/test-reporter.mjs",
+    "test:v18": "fnm exec --using v18 yarn test",
+    "test:v20": "fnm exec --using v20 yarn test",
+    "test:v22": "fnm exec --using v22 yarn test"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
