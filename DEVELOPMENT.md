@@ -3,9 +3,9 @@
 For the smoothest development experience in this codebase, you'll need:
 
 - [Node.js] — You'll need at least v18, which is the oldest supported version.
-- [fnm] — Optional, but helpful.
+  Other [LTS versions] may be helpful.
 - [yarn] — Not just npm.
-- [hyperfine] — Optional for many basic tasks, but required for performance metrics.
+- [fnm] — Optional, but helpful.
 
 You'll do a typical setup sequence from there.
 
@@ -45,7 +45,8 @@ tstyche ./type-test
   It will install an ancient version, and won't work.
   Instead, see the [yarn setup instructions].
 
-- For `fnm` and `hyperfine`, `brew install` works for both.
+- For `fnm`, `brew install fnm` works.
+  See below for additional guidance around multiple versions.
 
 ## Before you commit
 
@@ -68,7 +69,15 @@ fnm install --corepack-enabled v20
 fnm install --corepack-enabled v22
 ```
 
-Once you have v18, v20, and v22 installed, you can use them to run the tests:
+And just to make sure you're up to date:
+
+```shell
+fnm install --corepack-enabled --lts
+```
+
+This will likely tell you the latest LTS version is already installed, at least until these docs are out of date.
+
+Once you have multiple versions installed, you can use them to run the tests:
 
 ```shell
 yarn test:v18
@@ -85,6 +94,7 @@ fnm exec --with v18 yarn test
 You can also do this with [nvm], though `fnm` makes it a bit easier by working from within a `package.json` script, which `nvm` won't do without lots of extra setup.
 
 [Node.js]: https://nodejs.org
+[LTS versions]: https://nodejs.org/en/about/previous-releases
 [fnm]: https://github.com/Schniz/fnm
 [nvm]: https://github.com/nvm-sh/nvm
 [yarn]: https://yarnpkg.com/getting-started/install

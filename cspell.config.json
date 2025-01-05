@@ -8,5 +8,5 @@
   "ignoreRegExpList": ["\"tstyche/tstyche\"", "tstyche#\\d+", "tstyche[.]config[.]json"],
   "language": "en-US",
   "useGitignore": true,
-  "words": ["mochajs"]
+  "words": ["mochajs", "subpath"]
 }
