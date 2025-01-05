@@ -16,6 +16,7 @@ import type { Diagnostic } from "tstyche/tstyche";
  *   `expected` values.
  */
 export class AssertionError extends Error {
+  public override readonly name = "AssertionError";
   public override readonly stack: string;
   public readonly actualType: string;
   public readonly matcher: string;

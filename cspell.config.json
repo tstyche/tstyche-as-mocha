@@ -5,8 +5,8 @@
   },
   "files": ["**/*.js", "**/*.json", "**/*.md", "source/**/*", "static/**/*", "tests/**/*"],
   "ignorePaths": ["build/**/*"],
-  "ignoreRegExpList": ["\"tstyche/tstyche\"", "tstyche#\\d+"],
+  "ignoreRegExpList": ["\"tstyche/tstyche\"", "tstyche#\\d+", "tstyche[.]config[.]json"],
   "language": "en-US",
   "useGitignore": true,
-  "words": ["mochajs"]
+  "words": ["mochajs", "subpath"]
 }

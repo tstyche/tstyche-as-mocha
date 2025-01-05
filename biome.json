@@ -1,7 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "files": {
-    "ignore": [".cache/**", ".idea/**", ".yarn/**", "build/**", "coverage/**", "node_modules/**"]
+    "ignore": [".cache/**", ".idea/**", ".yarn/**", "build/**", "coverage/**", "node_modules/**", "package.json"],
+    "ignoreUnknown": true
   },
   "formatter": {
     "enabled": true,

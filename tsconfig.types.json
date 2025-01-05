@@ -9,6 +9,6 @@
     "noEmit": false,
     "outDir": "./build/types"
   },
-  "include": ["./source/mocha.ts"],
+  "include": ["./source/**/*.ts"],
   "extends": "./tsconfig.json"
 }

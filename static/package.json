@@ -9,10 +9,16 @@
   },
   "exports": {
     ".": {
-      "import": "./esm/index.mjs",
-      "require": "./cjs/index.js",
-      "types": "./types/index.d.ts",
-      "default": "./esm/index.mjs"
+      "import": "./esm/mocha.mjs",
+      "require": "./cjs/mocha.js",
+      "types": "./types/mocha.d.ts",
+      "default": "./esm/mocha.mjs"
+    },
+    "reporter": {
+      "import": "./esm/AsMochaReporter.mjs",
+      "require": "./cjs/AsMochaReporter.js",
+      "types": "./types/AsMochaReporter.d.ts",
+      "default": "./esm/AsMochaReporter.mjs"
     }
   },
   "funding": "https://github.com/tstyche/tstyche?sponsor=1",
