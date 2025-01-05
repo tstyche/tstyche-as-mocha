@@ -1,6 +1,6 @@
 import * as path from "node:path";
 import * as process from "node:process";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import * as util from "node:util";
 import { type CommandLineOptions, Config, Runner, Select } from "tstyche/tstyche";
 
@@ -24,6 +24,12 @@ if (typeof global.__dirname === "string") {
     return scriptPath == null ? undefined : path.dirname(scriptPath);
   }
   scriptDir = pathFromStack() ?? process.cwd();
+}
+
+if (/^\w:/.test(scriptDir)) {
+  // Because Windows drive letters foul up ESM dynamic imports
+  // with ERR_UNSUPPORTED_ESM_URL_SCHEME errors.
+  scriptDir = pathToFileURL(scriptDir).toString();
 }
 
 const {
