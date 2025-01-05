@@ -103,7 +103,7 @@ jobs:
           path: build
       - run: "yarn test:mocha"
       - run: "yarn test:tstyche"
-      - run: "yarn test:tstyche-as-mocha"
+      - run: "yarn test:tstyche-as-mocha:ts"
 
   test-os:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && !startsWith(github.head_ref, 'renovate/'))
@@ -131,4 +131,4 @@ jobs:
           path: build
       - run: "yarn test:mocha"
       - run: "yarn test:tstyche"
-      - run: "yarn test:tstyche-as-mocha"
+      - run: "yarn test:tstyche-as-mocha:ts"
