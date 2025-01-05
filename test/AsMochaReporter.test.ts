@@ -1,5 +1,5 @@
 import * as path from "node:path";
-import {fileURLToPath} from "node:url";
+import { fileURLToPath } from "node:url";
 import { expect } from "chai";
 import { describe, it } from "mocha";
 import AsMochaReporter from "../source/AsMochaReporter.js";
