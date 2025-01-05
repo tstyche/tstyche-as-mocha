@@ -26,12 +26,6 @@ if (typeof global.__dirname === "string") {
   scriptDir = pathFromStack() ?? process.cwd();
 }
 
-if (/^\w:/.test(scriptDir)) {
-  // Because Windows drive letters foul up ESM dynamic imports
-  // with ERR_UNSUPPORTED_ESM_URL_SCHEME errors.
-  scriptDir = pathToFileURL(scriptDir).toString();
-}
-
 const {
   values: { config: configArg, grep, help, reporter: reporterArg },
   positionals,
@@ -131,8 +125,14 @@ const run = async () => {
     commandLineOptions,
     ...(pathMatch == null ? {} : { pathMatch }),
   });
+  let reporterScript = path.resolve(scriptDir, "AsMochaReporter.js");
+  if (/^\w:/.test(reporterScript)) {
+    // Because Windows drive letters foul up ESM dynamic imports
+    // with ERR_UNSUPPORTED_ESM_URL_SCHEME errors.
+    reporterScript = pathToFileURL(reporterScript).toString();
+  }
   // Clear out the default Line and Summary reporters.
-  resolvedConfig.reporters = [path.resolve(scriptDir, "AsMochaReporter.js")];
+  resolvedConfig.reporters = [reporterScript];
   const testFiles = await Select.selectFiles(resolvedConfig);
   const runner = new Runner(resolvedConfig);
   // Ready?  Go!!!!
