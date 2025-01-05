@@ -1,5 +1,6 @@
 import * as console from "node:console";
 import * as process from "node:process";
+import { pathToFileURL } from "node:url";
 import type * as M from "mocha";
 import type { ResolvedConfig } from "tstyche/tstyche";
 import type { ReporterEvent } from "tstyche/tstyche";
@@ -15,6 +16,13 @@ export type RunnerHandler = (runner: M.Runner) => void;
 // noinspection JSUnusedGlobalSymbols
 export default class AsMochaReporter extends BaseReporter {
   public static readonly CANNOT_FIND_ERROR: string = "Cannot find: --reporter or -R";
+
+  constructor(config: ResolvedConfig) {
+    super(config);
+    AsMochaReporter.loadReporter().then(() => {
+      console.log("Reporter loaded");
+    });
+  }
 
   /**
    * Find the path to the mocha (not TSTyche) reporter.  This may be a
@@ -73,7 +81,12 @@ export default class AsMochaReporter extends BaseReporter {
    * ```
    */
   public static async loadReporter(options: LoadReporterOptions = {}): Promise<RunnerHandler> {
-    const reporterName = options.reporter ?? AsMochaReporter.getReporterScriptPath();
+    let reporterName: string = options.reporter ?? AsMochaReporter.getReporterScriptPath();
+    if (/^\w:/.test(reporterName)) {
+      // We need to convert this to a file URL to avoid ERR_UNSUPPORTED_ESM_URL_SCHEME
+      // on Windows.
+      reporterName = pathToFileURL(reporterName).toString();
+    }
     const reporterModule = (await import(reporterName)).default as unknown;
     if (options.verbose) {
       console.log(`Reporter loaded: ${reporterName}`);
@@ -82,13 +95,6 @@ export default class AsMochaReporter extends BaseReporter {
       throw new Error(`Imported reporter does not have a default export: ${reporterName}`);
     }
     return reporterModule as RunnerHandler;
-  }
-
-  constructor(config: ResolvedConfig) {
-    super(config);
-    AsMochaReporter.loadReporter().then(() => {
-      console.log("Reporter loaded");
-    });
   }
 
   public override on([event, _payload]: ReporterEvent): void {

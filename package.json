@@ -36,7 +36,7 @@
     "clean": "rimraf build --preserve-root",
     "format": "biome format --write --verbose",
     "lint": "biome lint --write",
-    "precommit": "yarn lint && yarn check && yarn build && yarn test",
+    "precommit": "yarn lint && yarn format && yarn check && yarn build && yarn test",
     "prepublish": "yarn build",
     "test": "yarn test:mocha && yarn test:tstyche && yarn test:tstyche-as-mocha",
     "test:mocha": "mocha",
